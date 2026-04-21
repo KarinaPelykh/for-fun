@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { ToDoList } from "./components/ToDoList";
+import { UserProfile } from "./components/UserProfile";
 export type Task = { id: number; text: string; done: boolean };
 
 function App() {
@@ -34,7 +35,10 @@ function App() {
   ) : isLoading ? (
     <p>Loading....</p>
   ) : (
-    <ToDoList data={data} setData={setData} />
+    <>
+      <ToDoList data={data} setData={setData} />
+      <UserProfile />
+    </>
   );
 }
 
