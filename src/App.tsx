@@ -30,12 +30,25 @@ function App() {
       });
   }, []);
 
+  const isEvery = data.every((item) => item.done);
   return isError ? (
     <h1>Sorry, but you should reload page, thanks</h1>
   ) : isLoading ? (
     <p>Loading....</p>
   ) : (
     <>
+      <button>
+        Selected all
+        <input
+          type="checkbox"
+          checked={isEvery}
+          onChange={() =>
+            setData((prev) =>
+              prev.map((task) => ({ ...task, done: !task.done })),
+            )
+          }
+        />
+      </button>
       <ToDoList data={data} setData={setData} />
       <UserProfile />
     </>
