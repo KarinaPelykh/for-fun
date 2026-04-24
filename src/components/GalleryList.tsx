@@ -2,20 +2,26 @@ import { useEffect, useRef, useState } from "react";
 import { GalleryItem } from "./GalleryItem";
 import { Modal } from "./Modal";
 
-export const GalleryList = ({ data, setIsOpen, isOpen }) => {
-  const [active, setActive] = useState(null);
+type GalleryListProps = {
+  data: { url: string; id: string }[];
+  setIsOpen: (val: boolean) => void;
+  isOpen: boolean;
+};
+
+export const GalleryList = ({ data, setIsOpen, isOpen }: GalleryListProps) => {
+  const [active, setActive] = useState<null | number>(null);
   const inputRef = useRef(null);
 
   const prev = () => {
-    setActive((prev) => (prev + 1) % data.length);
+    setActive((prev) => ((prev ?? 0) + 1) % data.length);
   };
 
   const next = () => {
-    setActive((prev) => (prev - 1 + data.length) % data.length);
+    setActive((prev) => ((prev ?? 0) - 1 + data.length) % data.length);
   };
 
   useEffect(() => {
-    const d = (e) => {
+    const d = (e: Event) => {
       console.log(inputRef.current === e.target);
 
       if (inputRef.current) {
@@ -30,7 +36,7 @@ export const GalleryList = ({ data, setIsOpen, isOpen }) => {
   }, [setIsOpen, isOpen]);
 
   useEffect(() => {
-    const closeWindow = (e) => {
+    const closeWindow = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
         setIsOpen(false);
       }
@@ -62,7 +68,7 @@ export const GalleryList = ({ data, setIsOpen, isOpen }) => {
         <div ref={inputRef}>
           <Modal prev={prev} next={next}>
             <img
-              src={data[active].url}
+              src={active ? data[active].url : ""}
               className="w-50 h-auto block object-contain"
             />
           </Modal>
