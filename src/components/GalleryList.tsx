@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { GalleryItem } from "./GalleryItem";
 import { Modal } from "./Modal";
 
@@ -10,7 +10,6 @@ type GalleryListProps = {
 
 export const GalleryList = ({ data, setIsOpen, isOpen }: GalleryListProps) => {
   const [active, setActive] = useState<null | number>(null);
-  const inputRef = useRef(null);
 
   const prev = () => {
     setActive((prev) => ((prev ?? 0) + 1) % data.length);
@@ -21,10 +20,8 @@ export const GalleryList = ({ data, setIsOpen, isOpen }: GalleryListProps) => {
   };
 
   useEffect(() => {
-    const d = (e: Event) => {
-      console.log(inputRef.current === e.target);
-
-      if (inputRef.current) {
+    const d = (e: MouseEvent) => {
+      if (e.target === e.currentTarget) {
         setIsOpen(false);
       }
     };
@@ -65,14 +62,16 @@ export const GalleryList = ({ data, setIsOpen, isOpen }: GalleryListProps) => {
         })}
       </ul>
       {isOpen && (
-        <div ref={inputRef}>
-          <Modal prev={prev} next={next}>
-            <img
-              src={active ? data[active].url : ""}
-              className="w-50 h-auto block object-contain"
-            />
-          </Modal>
-        </div>
+        <Modal prev={prev} next={next}>
+          <img
+            src={
+              active !== null
+                ? data[active].url
+                : "https://www.diamondpet.com/wp-content/uploads/2022/02/close-up-white-cat-with-blue-eyes-121224.jpg"
+            }
+            className="w-50 h-auto block object-contain"
+          />
+        </Modal>
       )}
     </>
   );

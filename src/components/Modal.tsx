@@ -1,6 +1,13 @@
-export const Modal = ({ children, prev, next }) => {
+import type { ReactNode } from "react";
+
+type ModalProps = {
+  children: ReactNode;
+  prev: () => void;
+  next: () => void;
+};
+export const Modal = ({ children, prev, next }: ModalProps) => {
   return (
-    <div className=" fixed inset-0 size-full bg-[rgba(0,0,0,0.11)] flex justify-center items-center">
+    <div className="overlay fixed inset-0 size-full bg-[rgba(0,0,0,0.11)] flex justify-center items-center">
       <div className=" absolute w-60  bg-white rounded-2xl">
         <div>{children}</div>
         <div className="flex justify-between">
