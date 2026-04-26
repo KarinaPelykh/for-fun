@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { MovieList } from "./MovieList";
+import { SearchMovie } from "./SearchMovie";
 export const Movie = () => {
   const [movies, setMovies] = useState([]);
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
     async function getMovie() {
@@ -18,7 +20,8 @@ export const Movie = () => {
 
   return (
     <section>
-      <MovieList movies={movies} />
+      <SearchMovie search={search} setSearch={setSearch} />
+      <MovieList movies={movies} search={search} />
     </section>
   );
 };

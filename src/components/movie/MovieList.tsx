@@ -1,11 +1,41 @@
+import { useEffect, useState } from "react";
+import { Modal } from "./Modal";
 import { MovieItem } from "./MovieItem";
 
-export const MovieList = ({ movies }) => {
+export const MovieList = ({ movies, search }) => {
+  const [activeIndex, setActiveIndex] = useState(null);
+
+  useEffect(() => {
+    const closeModal = (e) => {
+      if (e.key === "Escape") {
+        setActiveIndex(null);
+      }
+    };
+    window.addEventListener("keydown", closeModal);
+
+    return () => window.removeEventListener("keydown", closeModal);
+  }, []);
+
+  const filteredData = movies.filter((movie) =>
+    movie.title.toLowerCase().includes(search.trim().toLowerCase()),
+  );
+
   return (
-    <ul className=" flex gap-2.5 flex-wrap px-10">
-      {movies.map((movie) => (
-        <MovieItem movie={movie} key={movie.id} />
-      ))}
-    </ul>
+    <>
+      <ul className=" flex gap-2.5 flex-wrap px-10">
+        {filteredData.map((movie, i) => (
+          <MovieItem
+            movie={movie}
+            key={movie.id}
+            onClick={() => setActiveIndex(i)}
+          />
+        ))}
+      </ul>
+      {activeIndex && (
+        <Modal>
+          <MovieItem movie={movies[activeIndex]} />
+        </Modal>
+      )}
+    </>
   );
 };

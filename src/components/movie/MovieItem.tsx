@@ -1,6 +1,6 @@
-export const MovieItem = ({ movie }) => {
+export const MovieItem = ({ movie, onClick }) => {
   return (
-    <li className=" border border-b-gray-950 p-2.5">
+    <li onClick={onClick} className=" border border-b-gray-950 p-2.5">
       <h1>{movie.title}</h1>
       <p>Year:{movie.year}</p>
 
