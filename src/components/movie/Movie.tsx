@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { MovieList } from "./MovieList";
 import { SearchMovie } from "./SearchMovie";
+import { WatchLIst } from "./Watchlist";
 export const Movie = () => {
   const [movies, setMovies] = useState([]);
   const [search, setSearch] = useState("");
@@ -21,7 +22,8 @@ export const Movie = () => {
   return (
     <section>
       <SearchMovie search={search} setSearch={setSearch} />
-      <MovieList movies={movies} search={search} />
+      <MovieList movies={movies} search={search} setMovies={setMovies} />
+      <WatchLIst movies={movies} />
     </section>
   );
 };

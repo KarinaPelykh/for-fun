@@ -4,69 +4,79 @@
     "title": "Inception",
     "year": 2010,
     "genre": "Sci-Fi",
-    "rating": 8.8
+    "rating": 8.8,
+    "done": false
   },
   {
     "id": 2,
     "title": "The Dark Knight",
     "year": 2008,
     "genre": "Action",
-    "rating": 9.0
+    "rating": 9.0,
+    "done": false
   },
   {
     "id": 3,
     "title": "Interstellar",
     "year": 2014,
     "genre": "Sci-Fi",
-    "rating": 8.6
+    "rating": 8.6,
+    "done": false
   },
   {
     "id": 4,
     "title": "Parasite",
     "year": 2019,
     "genre": "Drama",
-    "rating": 8.5
+    "rating": 8.5,
+    "done": false
   },
   {
     "id": 5,
     "title": "The Matrix",
     "year": 1999,
     "genre": "Sci-Fi",
-    "rating": 8.7
+    "rating": 8.7,
+    "done": false
   },
   {
     "id": 6,
     "title": "Forrest Gump",
     "year": 1994,
     "genre": "Drama",
-    "rating": 8.8
+    "rating": 8.8,
+    "done": false
   },
   {
     "id": 7,
     "title": "Gladiator",
     "year": 2000,
     "genre": "Action",
-    "rating": 8.5
+    "rating": 8.5,
+    "done": false
   },
   {
     "id": 8,
     "title": "Titanic",
     "year": 1997,
     "genre": "Romance",
-    "rating": 7.9
+    "rating": 7.9,
+    "done": false
   },
   {
     "id": 9,
     "title": "Avengers: Endgame",
     "year": 2019,
     "genre": "Superhero",
-    "rating": 8.4
+    "rating": 8.4,
+    "done": false
   },
   {
     "id": 10,
     "title": "The Shawshank Redemption",
     "year": 1994,
     "genre": "Drama",
-    "rating": 9.3
+    "rating": 9.3,
+    "done": false
   }
 ]

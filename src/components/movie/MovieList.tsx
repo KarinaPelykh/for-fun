@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Modal } from "./Modal";
 import { MovieItem } from "./MovieItem";
 
-export const MovieList = ({ movies, search }) => {
+export const MovieList = ({ movies, search, setMovies }) => {
   const [activeIndex, setActiveIndex] = useState(null);
 
   useEffect(() => {
@@ -24,14 +24,27 @@ export const MovieList = ({ movies, search }) => {
     <>
       <ul className=" flex gap-2.5 flex-wrap px-10">
         {filteredData.map((movie, i) => (
-          <MovieItem
-            movie={movie}
-            key={movie.id}
-            onClick={() => setActiveIndex(i)}
-          />
+          <>
+            <input
+              type="checkbox"
+              value={movie.done}
+              onChange={() =>
+                setMovies((prev) => {
+                  return prev.map((item) =>
+                    movie.id === item.id ? { ...item, done: !item.done } : item,
+                  );
+                })
+              }
+            />
+            <MovieItem
+              movie={movie}
+              key={movie.id}
+              onClick={() => setActiveIndex(i)}
+            />
+          </>
         ))}
       </ul>
-      {activeIndex && (
+      {activeIndex !== null && (
         <Modal>
           <MovieItem movie={movies[activeIndex]} />
         </Modal>
