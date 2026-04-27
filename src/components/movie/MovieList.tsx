@@ -45,7 +45,7 @@ export const MovieList = ({ movies, search, setMovies }) => {
         ))}
       </ul>
       {activeIndex !== null && (
-        <Modal>
+        <Modal movies={movies} setActiveIndex={setActiveIndex}>
           <MovieItem movie={movies[activeIndex]} />
         </Modal>
       )}

@@ -11,11 +11,11 @@ type GalleryListProps = {
 export const GalleryList = ({ data, setIsOpen, isOpen }: GalleryListProps) => {
   const [active, setActive] = useState<null | number>(null);
 
-  const prev = () => {
+  const next = () => {
     setActive((prev) => ((prev ?? 0) + 1) % data.length);
   };
 
-  const next = () => {
+  const prev = () => {
     setActive((prev) => ((prev ?? 0) - 1 + data.length) % data.length);
   };
 
