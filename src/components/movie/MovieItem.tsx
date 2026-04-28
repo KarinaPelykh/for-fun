@@ -1,4 +1,11 @@
-export const MovieItem = ({ movie, onClick }) => {
+import type { Movie } from "./Movie";
+
+type MovieItemProps = {
+  movie:Movie;
+  onClick;
+};
+
+export const MovieItem = ({ movie, onClick }: MovieItemProps) => {
   return (
     <li onClick={onClick} className=" border border-b-gray-950 p-2.5">
       <h1>{movie.title}</h1>

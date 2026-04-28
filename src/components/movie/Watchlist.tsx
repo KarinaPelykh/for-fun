@@ -1,14 +1,13 @@
 import { MovieItem } from "./MovieItem";
 
-export const WatchLIst = ({ movies }) => {
-  const filtered = movies.filter((movie) => movie.done);
+export const WatchLIst = ({ watchList }) => {
   return (
     <div>
-      {filtered.length !== 0 && (
+      {watchList.length !== 0 && (
         <>
           <h1>Watched movies</h1>
           <ul>
-            {filtered.map((movie) => (
+            {watchList.map((movie) => (
               <MovieItem movie={movie} key={movie.id} />
             ))}
           </ul>

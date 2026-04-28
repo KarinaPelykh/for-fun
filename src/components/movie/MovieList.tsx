@@ -1,9 +1,26 @@
-import { useEffect, useState } from "react";
+import {
+  Fragment,
+  useEffect,
+  useState,
+
+} from "react";
 import { Modal } from "./Modal";
 import { MovieItem } from "./MovieItem";
+import type { Movie } from "./Movie";
 
-export const MovieList = ({ movies, search, setMovies }) => {
-  const [activeIndex, setActiveIndex] = useState(null);
+type MovieListProps = {
+  movies: Movie[];
+  search: string;
+  toggleDone: ;
+  watchList: Movie[];
+};
+export const MovieList = ({
+  movies,
+  search,
+  toggleDone,
+  watchList,
+}: MovieListProps) => {
+  const [activeIndex, setActiveIndex] = useState<null | string>(null);
 
   useEffect(() => {
     const closeModal = (e) => {
@@ -20,29 +37,34 @@ export const MovieList = ({ movies, search, setMovies }) => {
     movie.title.toLowerCase().includes(search.trim().toLowerCase()),
   );
 
+  const handleWatchedList = (id: string) =>
+    watchList.some((item) => item?.id === id);
+
+  const isInWatchList = handleWatchedList();
+
   return (
     <>
-      <ul className=" flex gap-2.5 flex-wrap px-10">
-        {filteredData.map((movie, i) => (
-          <>
-            <input
-              type="checkbox"
-              value={movie.done}
-              onChange={() =>
-                setMovies((prev) => {
-                  return prev.map((item) =>
-                    movie.id === item.id ? { ...item, done: !item.done } : item,
-                  );
-                })
-              }
-            />
-            <MovieItem
-              movie={movie}
-              key={movie.id}
-              onClick={() => setActiveIndex(i)}
-            />
-          </>
-        ))}
+      <ul className="flex gap-2.5 flex-wrap px-10">
+        {filteredData.map((movie) => {
+          return (
+            <Fragment key={movie.id}>
+              <input
+                type="checkbox"
+                value={isInWatchList}
+                onChange={() => {
+                  toggleDone(movie);
+                  handleWatchedList(movie.id);
+                }}
+                // value={movie.done}
+                // onChange={() => toggleDone(movie.id)}
+              />
+              <MovieItem
+                movie={movie}
+                onClick={() => setActiveIndex(movie.id)}
+              />
+            </Fragment>
+          );
+        })}
       </ul>
       {activeIndex !== null && (
         <Modal movies={movies} setActiveIndex={setActiveIndex}>
