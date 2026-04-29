@@ -2,7 +2,8 @@
 // import { ToDoList } from "./components/ToDoList";
 // import { UserProfile } from "./components/UserProfile";
 // import { Gallery } from "./components/Gallery";
-import { Movie } from "./components/movie/Movie";
+// import { Movie } from "./components/movie/Movie";
+import { NotesBoard } from "./components/notes-board/NotesBoard";
 import "./index.css";
 export type Task = { id: number; text: string; done: boolean };
 
@@ -41,9 +42,9 @@ function App() {
   // ) : (
   return (
     <>
-      {" "}
+      <NotesBoard />
       {/* <Gallery /> */}
-      <Movie />
+      {/* <Movie /> */}
       {/* <button>
         Selected all
         <input
