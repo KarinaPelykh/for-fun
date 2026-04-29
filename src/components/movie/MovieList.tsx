@@ -1,9 +1,4 @@
-import {
-  Fragment,
-  useEffect,
-  useState,
-
-} from "react";
+import { Fragment, useEffect, useState } from "react";
 import { Modal } from "./Modal";
 import { MovieItem } from "./MovieItem";
 import type { Movie } from "./Movie";
@@ -11,7 +6,7 @@ import type { Movie } from "./Movie";
 type MovieListProps = {
   movies: Movie[];
   search: string;
-  toggleDone: ;
+  toggleDone: (val: Movie) => void;
   watchList: Movie[];
 };
 export const MovieList = ({
@@ -20,10 +15,10 @@ export const MovieList = ({
   toggleDone,
   watchList,
 }: MovieListProps) => {
-  const [activeIndex, setActiveIndex] = useState<null | string>(null);
+  const [activeIndex, setActiveIndex] = useState<null | number>(null);
 
   useEffect(() => {
-    const closeModal = (e) => {
+    const closeModal = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
         setActiveIndex(null);
       }
@@ -37,7 +32,7 @@ export const MovieList = ({
     movie.title.toLowerCase().includes(search.trim().toLowerCase()),
   );
 
-  const handleWatchedList = (id: string) =>
+  const handleWatchedList = (id?: number) =>
     watchList.some((item) => item?.id === id);
 
   const isInWatchList = handleWatchedList();
@@ -50,7 +45,7 @@ export const MovieList = ({
             <Fragment key={movie.id}>
               <input
                 type="checkbox"
-                value={isInWatchList}
+                checked={isInWatchList}
                 onChange={() => {
                   toggleDone(movie);
                   handleWatchedList(movie.id);

@@ -1,6 +1,10 @@
+import type { Movie } from "./Movie";
 import { MovieItem } from "./MovieItem";
 
-export const WatchLIst = ({ watchList }) => {
+type WatchListProps = {
+  watchList: Movie[];
+};
+export const WatchList = ({ watchList }: WatchListProps) => {
   return (
     <div>
       {watchList.length !== 0 && (

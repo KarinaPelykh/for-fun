@@ -1,8 +1,8 @@
 import type { Movie } from "./Movie";
 
 type MovieItemProps = {
-  movie:Movie;
-  onClick;
+  movie: Movie;
+  onClick?: () => void;
 };
 
 export const MovieItem = ({ movie, onClick }: MovieItemProps) => {

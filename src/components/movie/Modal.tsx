@@ -1,7 +1,10 @@
-import type { ReactNode } from "react";
+import type { Dispatch, ReactNode, SetStateAction } from "react";
+import type { Movie } from "./Movie";
 
 type ModalProps = {
   children: ReactNode;
+  movies: Movie[];
+  setActiveIndex: Dispatch<SetStateAction<number | null>>;
 };
 
 export const Modal = ({ children, setActiveIndex, movies }: ModalProps) => {

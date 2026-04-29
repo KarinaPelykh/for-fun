@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { MovieList } from "./MovieList";
 import { SearchMovie } from "./SearchMovie";
-import { WatchLIst } from "./Watchlist";
+import { WatchList } from "./Watchlist";
 export type Movie = {
   id: number;
   title: string;
@@ -12,7 +12,7 @@ export type Movie = {
 };
 
 export const Movie = () => {
-  const [movies, setMovies] = useState<React.SetStateAction<Movie[]>>([]);
+  const [movies, setMovies] = useState<Movie[]>([]);
   const [search, setSearch] = useState("");
   const [watchList, setWatchList] = useState<Movie[]>([]);
 
@@ -53,7 +53,7 @@ export const Movie = () => {
         toggleDone={toggleDone}
         watchList={watchList}
       />
-      <WatchLIst watchList={watchList} />
+      <WatchList watchList={watchList} />
     </section>
   );
 };
