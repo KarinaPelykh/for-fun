@@ -12,21 +12,20 @@ export type Note = {
 export const NotesBoard = () => {
   const [notes, setNotes] = useState<Note[]>([]);
   const [text, setText] = useState("");
-  const [editID, setEditID] = useState<number | null>(null);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    const note = { id: nanoid(), text, done: false };
-    setNotes((prev) => [...prev, note]);
-    setText("");
+    if (text) {
+      const note = { id: nanoid(), text, done: false };
+      setNotes((prev) => [...prev, note]);
+      setText("");
+    }
   };
-  console.log(editID);
 
   return (
     <section>
       <AddNote text={text} setText={setText} handleSubmit={handleSubmit} />
-      <NotesList notes={notes} setEditID={setEditID} />
+      <NotesList notes={notes} />
     </section>
   );
 };
