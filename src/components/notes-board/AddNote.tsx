@@ -8,7 +8,7 @@ export const AddNote = ({ text, setText, handleSubmit }: AddNoteProps) => {
   return (
     <form
       onSubmit={handleSubmit}
-      className=" flex flex-col w-75 gap-5 mx-auto border border-b-emerald-700 rounded-3xl p-2.5"
+      className=" flex flex-col bg-mauve-50 w-75 gap-5 mx-auto border-2 border-b-emerald-700 rounded-3xl p-2.5"
     >
       <label className="block text-blue-400">Make notes for today 😇</label>
       <input
