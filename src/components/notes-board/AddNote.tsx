@@ -1,7 +1,9 @@
+import type { FormEvent } from "react";
+
 type AddNoteProps = {
   text: string;
   setText: (val: string) => void;
-  handleSubmit: (e: SubmitEvent) => void;
+  handleSubmit: (e: FormEvent) => void;
 };
 
 export const AddNote = ({ text, setText, handleSubmit }: AddNoteProps) => {

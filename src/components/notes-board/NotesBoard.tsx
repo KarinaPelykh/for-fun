@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, type FormEvent } from "react";
 import { AddNote } from "./AddNote";
 import { NotesList } from "./NotesList";
 import { nanoid } from "nanoid/non-secure";
@@ -9,7 +9,7 @@ export type Note = {
   id: string;
   text: string;
   done: boolean;
-  pinned: false;
+  pinned: boolean;
 };
 
 export const NotesBoard = () => {
@@ -17,7 +17,7 @@ export const NotesBoard = () => {
   const [text, setText] = useState("");
   const [search, setSearch] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     if (text) {
       const note = { id: nanoid(), text, done: false, pinned: false };
