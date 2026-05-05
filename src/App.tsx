@@ -3,7 +3,8 @@
 // import { UserProfile } from "./components/UserProfile";
 // import { Gallery } from "./components/Gallery";
 // import { Movie } from "./components/movie/Movie";
-import { NotesBoard } from "./components/notes-board/NotesBoard";
+import { Workspace } from "./components/workspace/Workspace";
+// import { NotesBoard } from "./components/notes-board/NotesBoard";
 import "./index.css";
 export type Task = { id: number; text: string; done: boolean };
 
@@ -42,7 +43,8 @@ function App() {
   // ) : (
   return (
     <>
-      <NotesBoard />
+      <Workspace />
+      {/* <NotesBoard /> */}
       {/* <Gallery /> */}
       {/* <Movie /> */}
       {/* <button>
