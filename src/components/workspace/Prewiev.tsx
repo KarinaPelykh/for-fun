@@ -7,10 +7,11 @@ type PreviewProps = {
   board: Board[];
   setBoardID: (id: number) => void;
 };
+
 export const Preview = ({ board, setBoardID }: PreviewProps) => {
   return (
     <>
-      <p>here you can create your board</p>{" "}
+      <p>here you can create your board</p>
       <ul>
         {board.map((item) => (
           <li

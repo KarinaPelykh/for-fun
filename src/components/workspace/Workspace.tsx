@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Preview } from "./Prewiev";
 import { Columns } from "./Columns";
 import { BoardBlock } from "./Boards";
+import { DragDropProvider, type DragEndEvent } from "@dnd-kit/react";
 
 const boards = [
   {
@@ -50,62 +51,65 @@ const columns = [
   },
 ];
 
-const dashboardCards = [
+const dashboardTask = [
   {
-    id: "todo",
+    id: "1",
     title: "Project Overview",
     subtitle: "Current status of all projects",
     image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71",
     type: "analytics",
     tag: "Work",
     color: "blue",
+    status: "todo",
   },
   {
-    id: "todo",
+    id: "2",
     title: "Design Inspiration",
     subtitle: "Fresh UI ideas for your next project",
     image: "https://images.unsplash.com/photo-1522542550221-31fd19575a2d",
     type: "creative",
     tag: "Design",
+    status: "todo",
     color: "purple",
   },
   {
-    id: "todo",
+    id: "3",
     title: "Daily Tasks",
     subtitle: "What you need to finish today",
     image: "https://images.unsplash.com/photo-1506784365847-bbad939e9335",
     type: "tasks",
     tag: "Productivity",
+    status: "todo",
     color: "green",
   },
   {
-    id: "doing",
-
+    id: "4",
     title: "Team Activity",
     subtitle: "What your team is working on",
     image: "https://images.unsplash.com/photo-1521737604893-d14cc237f11d",
     type: "social",
     tag: "Team",
+    status: "doing",
     color: "orange",
   },
   {
-    id: "done",
-
+    id: "5",
     title: "Learning Progress",
     subtitle: "Your courses and achievements",
     image: "https://images.unsplash.com/photo-1513258496099-48168024aec0",
     type: "education",
     tag: "Study",
+    status: "done",
     color: "indigo",
   },
   {
-    id: "doing",
-
+    id: "6",
     title: "Market Trends",
     subtitle: "Latest updates in tech & business",
     image: "https://images.unsplash.com/photo-1520607162513-77705c0f0d4a",
     type: "analytics",
     tag: "Insights",
+    status: "doing",
     color: "red",
   },
 ];
@@ -113,14 +117,32 @@ const dashboardCards = [
 export const Workspace = () => {
   const [boardID, setBoardID] = useState<number | null>(null);
 
-  const definedBoard = boards.find((item) => item.id === boardID);
+  const [tasks, setTasks] = useState(dashboardTask);
+
+  const activeBoard = boards.find((item) => item.id === boardID) ?? boards[0];
+
+  const handleDragEvent = (event: DragEndEvent) => {
+    const { operation } = event;
+
+    const taskId = operation.source?.id as string;
+
+    const newTaskID = operation.target?.id as string;
+
+    setTasks((prev) =>
+      prev.map((task) =>
+        task.id === taskId ? { ...task, status: newTaskID } : task,
+      ),
+    );
+  };
 
   return (
     <section className="w-full h-screen">
       {boardID ? (
-        <BoardBlock definedBoard={definedBoard}>
-          <Columns columns={columns} tasks={dashboardCards} />
-        </BoardBlock>
+        <DragDropProvider onDragEnd={handleDragEvent}>
+          <BoardBlock activeBoard={activeBoard}>
+            <Columns columns={columns} tasks={tasks} />
+          </BoardBlock>
+        </DragDropProvider>
       ) : (
         <Preview board={boards} setBoardID={setBoardID} />
       )}
