@@ -1,8 +1,11 @@
+import type { FormEvent } from "react";
+
 import { useState } from "react";
 import { Preview } from "./Prewiev";
-import { Columns } from "./Columns";
+import { Columns, type Tasks } from "./Columns";
 import { BoardBlock } from "./Boards";
 import { DragDropProvider, type DragEndEvent } from "@dnd-kit/react";
+import { AddTask } from "./AddTask";
 
 const boards = [
   {
@@ -117,7 +120,9 @@ const dashboardTask = [
 export const Workspace = () => {
   const [boardID, setBoardID] = useState<number | null>(null);
 
-  const [tasks, setTasks] = useState(dashboardTask);
+  const [tasks, setTasks] = useState<Tasks[]>(dashboardTask);
+
+  const [text, setText] = useState("");
 
   const activeBoard = boards.find((item) => item.id === boardID) ?? boards[0];
 
@@ -135,14 +140,36 @@ export const Workspace = () => {
     );
   };
 
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    setTasks((prev) => [
+      ...prev,
+      {
+        id: "7",
+        title: text,
+        subtitle: "Latest updates in tech & business",
+        image: "https://images.unsplash.com/photo-1520607162513-77705c0f0d4a",
+        type: "analytics",
+        tag: "Insights",
+        status: "todo",
+        color: "red",
+      },
+    ]);
+    setText("");
+  };
+
   return (
-    <section className="w-full h-screen">
+    <section className="w-full h-screen ">
       {boardID ? (
-        <DragDropProvider onDragEnd={handleDragEvent}>
-          <BoardBlock activeBoard={activeBoard}>
-            <Columns columns={columns} tasks={tasks} />
-          </BoardBlock>
-        </DragDropProvider>
+        <>
+          <AddTask text={text} setText={setText} handleSubmit={handleSubmit} />
+          <DragDropProvider onDragEnd={handleDragEvent}>
+            <BoardBlock activeBoard={activeBoard}>
+              <Columns columns={columns} tasks={tasks} setTasks={setTasks} />
+            </BoardBlock>
+          </DragDropProvider>
+        </>
       ) : (
         <Preview board={boards} setBoardID={setBoardID} />
       )}
