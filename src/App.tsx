@@ -3,8 +3,9 @@
 // import { UserProfile } from "./components/UserProfile";
 // import { Gallery } from "./components/Gallery";
 // import { Movie } from "./components/movie/Movie";
-import { Workspace } from "./components/workspace/Workspace";
+// import { Workspace } from "./components/workspace/Workspace";
 // import { NotesBoard } from "./components/notes-board/NotesBoard";
+import { Shop } from "./components/derived-data/Shop";
 import "./index.css";
 export type Task = { id: number; text: string; done: boolean };
 
@@ -43,7 +44,8 @@ function App() {
   // ) : (
   return (
     <>
-      <Workspace />
+      <Shop />
+      {/* <Workspace /> */}
       {/* <NotesBoard /> */}
       {/* <Gallery /> */}
       {/* <Movie /> */}
