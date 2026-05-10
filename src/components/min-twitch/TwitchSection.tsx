@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { VideoPlayer } from "./VideoPlayer";
 import { MessageList } from "./MessageList";
 import { AddMessage } from "./AddMessage";
 import { nanoid } from "nanoid";
+import { Modal } from "./Modal";
 export const chatMessages = [
   {
     id: "m1",
@@ -61,6 +62,8 @@ export const TwitchSection = () => {
 
   const [text, setText] = useState("");
 
+  const [userID, setUserID] = useState("");
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -83,13 +86,29 @@ export const TwitchSection = () => {
     setText("");
   };
 
+  useEffect(() => {
+    const hadleClose = (e) => {
+      if (e.key === "Escape") {
+        setUserID("");
+      }
+    };
+
+    window.addEventListener("keydown", hadleClose);
+
+    return () => window.removeEventListener("keydown", hadleClose);
+  }, []);
+
   return (
     <section className=" p-10 flex gap-10">
       <VideoPlayer />
-      <div>
-        <MessageList messages={messages} />
+      <div className="bg-fuchsia-300 p-5 rounded-2xl">
+        <h1 className="text-white mb-5 font-bold">Chat</h1>
+        <MessageList messages={messages} setUserID={setUserID} />
         <AddMessage setText={setText} text={text} handleSubmit={handleSubmit} />
       </div>
+      {userID && (
+        <Modal data={messages.find((message) => message.id === userID) || []} />
+      )}
     </section>
   );
 };
