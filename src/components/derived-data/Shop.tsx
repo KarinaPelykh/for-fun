@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Products } from "./Products";
-import { ShoppingCart } from "./shopping-cart";
+import { ShoppingCart } from "./Shopping-cart";
 
 const data = [
   { name: "Apple", price: 2, id: "1 " },
@@ -15,7 +15,6 @@ export type Product = {
 };
 export const Shop = () => {
   const [cartProducts, setCartProducts] = useState<Product[]>([]);
-  console.log(cartProducts);
 
   return (
     <section className="p-10">

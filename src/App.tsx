@@ -5,9 +5,10 @@
 // import { Movie } from "./components/movie/Movie";
 // import { Workspace } from "./components/workspace/Workspace";
 // import { NotesBoard } from "./components/notes-board/NotesBoard";
-import { Shop } from "./components/derived-data/Shop";
+// import { Shop } from "./components/derived-data/Shop";
+import { TwitchSection } from "./components/min-twitch/TwitchSection";
 import "./index.css";
-export type Task = { id: number; text: string; done: boolean };
+// export type Task = { id: number; text: string; done: boolean };
 
 function App() {
   // const [data, setData] = useState<Task[]>([]);
@@ -44,7 +45,9 @@ function App() {
   // ) : (
   return (
     <>
-      <Shop />
+      <TwitchSection />
+
+      {/* <Shop /> */}
       {/* <Workspace /> */}
       {/* <NotesBoard /> */}
       {/* <Gallery /> */}
